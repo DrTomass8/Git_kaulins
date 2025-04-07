@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -5,37 +7,52 @@ public class Kaulins {
 
 
 	
-static int mestKaulinu(int reizes) {
-	int skaitlis = 0;
+
+static int mestKaulinu() {
 	Random rand = new Random();
-	for(int i=0; i<reizes; i++) {
-		skaitlis = rand.nextInt(6)+1;
-		System.out.println("Uzkrita skaitlis: "+skaitlis);
-	}
+	int skaitlis = rand.nextInt(6)+1;
+
 	return skaitlis;
 }
 	public static void main(String[] args) {
 Scanner scan = new Scanner(System.in);
-int reizes = 0, izvele, pedejais = 0;
+
+int reizes = 0, izvele, lielakais=0;
+List<Integer> pedejie = new ArrayList<Integer>();
 do {
-System.out.println("1-Mest kauliņu |2-Apskatīt pēdējo |3-Apturēt");
+System.out.println("1-Mest kauliņu |2-Apskatīt pēdējo |3 - Apskatīt lielāko |4-Apturēt");
 izvele = scan.nextInt();
 switch(izvele){
 	case 1:
 	do {
 System.out.println("Cik reizes mest kauliņu");
 	reizes = scan.nextInt();
-	pedejais = mestKaulinu(reizes);
+	
 	}while(reizes < 1);
+	pedejie.add(mestKaulinu());
 	break;
 	case 2:
-	System.out.println("Pēdējais uzmestais ir "+pedejais);	
+	System.out.println("Pēdējā metiena skaitļi ir ");
+for(Integer i : pedejie){
+		System.out.println(i+" ");
+}
+System.out.println();
 	break;
 	case 3:
-	System.out.println("rogramma apturēta!");
+	
+	for(int i=0; i<pedejie.size(); i++){
+		if(pedejie.get(i)>lielakais){
+			lielakais = pedejie.get(i);
+		}
+
+	}
+	System.out.println("Lielākais skaitlis pedeja metiena ir "+lielakais);
+	break;
+	case 4:
+	System.out.println("Programma apturēta!");
 	break;
 }
-}while(izvele!=2);
+}while(izvele!=4);
 
 scan.close();
 	}
